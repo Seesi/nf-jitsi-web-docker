@@ -1,7 +1,7 @@
 #!/bin/bash
 
-REPO_ROOT=~/Projects/accede/docker-jitsi-meet
-NOT_FORGOTTEN_JITSI_MEET_DIR=~/Projects/accede/nf-jitsi-meet
+REPO_ROOT=~/projects/accede/nf-jitsi-web-docker
+NOT_FORGOTTEN_JITSI_MEET_DIR=~/projects/accede/nf-jitsi-meet
 JITSI_MEET_CONFIG_DIR=~/.jitsi-meet-cfg
 
 echo "Building Jitsi-Meet packages from source ..." && sleep 1
@@ -14,6 +14,7 @@ echo "Moving and unzipping Jitsi-Meet package archive into Docker build context"
 
 mv $NOT_FORGOTTEN_JITSI_MEET_DIR/jitsi-meet.tar.bz2 $REPO_ROOT/web || { echo "Failed to move packages to destination"; exit 1; }
 cd $REPO_ROOT/web || { echo "Failed to find $REPO_ROOT/Docker/Web"; exit 1; }
+rm -rf jitsi-meet/ || { echo "Failed to remove jitsi-meet folder": exit 1; }
 tar -xvf jitsi-meet* || { echo "Failed to unzip archive"; exit 1; }
 rm -rf $REPO_ROOT/web/jitsi-meet.tar.bz2
 
